@@ -7,7 +7,7 @@ import Date from '../../components/date'
 
 
 export default function Post({postData}) {
-    return <Layout>
+    return (<Layout>
         <Head>
             <title>{postData.title}</title>
         </Head>
@@ -19,18 +19,19 @@ export default function Post({postData}) {
             <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         </article>
     </Layout>
+    )
 }
 
 export async function getStaticPaths() {
     const paths = getAllPostIds()
     return {
         paths,
-        fallback: true
+        fallback: false
     }
 }
 
 export async function getStaticProps({params}) {
-    const postData = await getPostData(params.id)
+    const postData = await getPostData(params.id);
     return {
         props: {
             postData
